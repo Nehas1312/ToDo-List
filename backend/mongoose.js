@@ -1,36 +1,32 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 
-mongoose.set('strictQuery', false)
+mongoose.set("strictQuery", false);
 
+const url = process.env.MONGODB_URI;
 
-const url = process.env.MONGODB_URI
+console.log("connecting to", url);
 
-
-
-
-console.log('connecting to', url)
-
-mongoose.connect(url)
-  .then(result => {
-    console.log('connected to MongoDB')
+mongoose
+  .connect(url)
+  .then((result) => {
+    console.log("connected to MongoDB");
   })
-  .catch(error => {
-    console.log('error connecting to MongoDB:', error.message)
-  })
+  .catch((error) => {
+    console.log("error connecting to MongoDB:", error.message);
+  });
 
 const mySchema = new mongoose.Schema({
-    tname : String,
-    date : Date,
-    taccomplished: Boolean
+  tname: String,
+  date: Date,
+  taccomplished: Boolean,
 });
 
-mySchema.set('toJSON', {
+mySchema.set("toJSON", {
   transform: (document, returnedObject) => {
-    returnedObject.id = returnedObject._id.toString()
-    delete returnedObject._id
-    delete returnedObject.__v
-  }
-})
+    returnedObject.id = returnedObject._id.toString();
+    delete returnedObject._id;
+    delete returnedObject.__v;
+  },
+});
 
-
-module.exports = mongoose.model('Data', mySchema)
+module.exports = mongoose.model("Data", mySchema);

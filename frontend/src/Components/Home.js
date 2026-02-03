@@ -11,6 +11,8 @@ import "../Styles/myday.css";
 const Home = () => {
   const [taskdata, setTaskData] = useState([]);
   const [loadingTasks, setLoadingTasks] = useState([]); // State to manage loading status of each task
+  const currentDate = new Date();
+  currentDate.setHours(0, 0, 0, 0);
 
   useEffect(() => {
     console.log("effect");
@@ -45,20 +47,20 @@ const Home = () => {
         .then((response) => {
           setTaskData((prevTaskData) =>
             prevTaskData.map((task) =>
-              task.id === taskId ? updatedTask : task
-            )
+              task.id === taskId ? updatedTask : task,
+            ),
           );
 
           // Update loading status for the specific task after completion
           setLoadingTasks((prevState) =>
-            prevState.filter((id) => id !== taskId)
+            prevState.filter((id) => id !== taskId),
           );
         })
         .catch((error) => {
           console.error("Error updating task:", error);
           // Update loading status for the specific task after failure
           setLoadingTasks((prevState) =>
-            prevState.filter((id) => id !== taskId)
+            prevState.filter((id) => id !== taskId),
           );
         });
     }, 2000); // 2-second delay
@@ -74,7 +76,7 @@ const Home = () => {
       .deleteData(taskId)
       .then(() => {
         setTaskData((prevTaskData) =>
-          prevTaskData.filter((task) => task.id !== taskId)
+          prevTaskData.filter((task) => task.id !== taskId),
         );
       })
       .catch((error) => {
@@ -113,32 +115,41 @@ const Home = () => {
           </thead>
           <tbody>
             {taskdata.map((task) => {
-              const date = new Date(task.date);
-              const formattedDate = date.toLocaleDateString();
-              const truncatedTaskName = task.tname; // Take only the first 20 characters of the task name
+              const taskDate = new Date(task.date);
+              taskDate.setHours(0, 0, 0, 0);
+
+              const isExpired = taskDate < currentDate;
+              const formattedDate = taskDate.toLocaleDateString();
+              const truncatedTaskName = task.tname;
 
               return (
                 <tr key={task.id} className="task-item">
                   <td className="task-name">{truncatedTaskName}</td>
                   <td className="task-date">{formattedDate}</td>
                   <td className="submission">
-                    <Button
-                      variant="primary"
-                      onClick={() => handleSubmission(task.id)}
-                      disabled={task.taccomplished}
-                    >
-                      {isTaskLoading(task.id) ? (
-                        <>
-                          <span>+10&nbsp;P</span>
-                          <Spinner animation="border" size="sm" />
-                          <span>&nbsp;INTS</span>
-                        </>
-                      ) : task.taccomplished ? (
-                        "Completed"
-                      ) : (
-                        "Mark as Submitted"
-                      )}
-                    </Button>
+                    {isExpired ? (
+                      <Button variant="danger" disabled>
+                        Expired
+                      </Button>
+                    ) : (
+                      <Button
+                        variant="primary"
+                        onClick={() => handleSubmission(task.id)}
+                        disabled={task.taccomplished}
+                      >
+                        {isTaskLoading(task.id) ? (
+                          <>
+                            <span>+10&nbsp;P</span>
+                            <Spinner animation="border" size="sm" />
+                            <span>&nbsp;INTS</span>
+                          </>
+                        ) : task.taccomplished ? (
+                          "Completed"
+                        ) : (
+                          "Mark as Submitted"
+                        )}
+                      </Button>
+                    )}
                   </td>
                   <td className="delete">
                     {" "}
