@@ -39,7 +39,7 @@ const Completed = () => {
       .deleteData(taskId)
       .then(() => {
         setTaskData((prevTaskData) =>
-          prevTaskData.filter((task) => task.id !== taskId)
+          prevTaskData.filter((task) => task.id !== taskId),
         );
       })
       .catch((error) => {
@@ -48,16 +48,10 @@ const Completed = () => {
   };
 
   return (
-    <Container className="home-container ">
-      <div className="home-content">
+    <div className="days">
+      <Container className="home-container">
         <h1>Completed</h1>
-        <Table
-          className="task-list"
-          striped
-          bordered
-          hover
-          style={{ marginLeft: "-100px", marginTop: "60px" }}
-        >
+        <Table className="task-list" striped bordered hover>
           <thead>
             <tr>
               <th>Tasks</th>
@@ -110,8 +104,8 @@ const Completed = () => {
               })}
           </tbody>
         </Table>
-      </div>
-    </Container>
+      </Container>
+    </div>
   );
 };
 

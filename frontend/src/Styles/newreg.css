@@ -6,9 +6,10 @@
   background: black;
   color: white;
 }
-
 .new-content {
   text-align: center;
+  max-width: 900px;
+  width: 100%;
 }
 
 .new-content input[type="text"]{
@@ -92,4 +93,9 @@
   .new-content input[type="date"] {
     width: calc(100% - 80%); /* Set width to 100% - 20px for smaller screens */
 }
+}
+.days {
+  background: black;
+  min-height: 100vh;
+  padding-left: 210px; /* sidebar width */
 }

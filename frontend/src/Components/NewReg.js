@@ -68,46 +68,51 @@ const New = () => {
   const formattedDate = currentDate.toLocaleDateString("en-US", options);
 
   return (
-    <div className="new-container">
-      <div className="new-content">
-        <h2>Create New Task</h2>
-        <p>{formattedDate}</p> {/* Display the current day and date */}
-        <form onSubmit={handleItemSubmit}>
-          <div class="input-wrapper">
-            <input
-              type="text"
-              value={newItem}
-              onChange={handleItemChange}
-              placeholder="Enter task details"
-            />
+    <div className="days">
+      <div className="new-container">
+        <div className="new-content">
+          <h2>Create New Task</h2>
+          <p>{formattedDate}</p>
 
-            <input
-              type="date"
-              value={dueDate}
-              onChange={handleDueDateChange}
-              placeholder="DueDate"
-              onMouseEnter={handleDueDateMouseEnter}
-              onMouseLeave={handleDueDateMouseLeave}
-            />
-            {showDueDateMessage && <p className="due-date-message">DUE DATE</p>}
-          </div>
-          <br></br>
-          <br></br>
-          <div className="new-contentt">
-            <button type="submit">
-              {loading ? ( // Conditionally render loading icon if loading state is true
-                <>
-                  <span>TICK-T</span>
-                  <FontAwesomeIcon icon={faClock} spin />
-                  <span>CK</span>
-                </>
-              ) : (
-                "Add New Task"
+          <form onSubmit={handleItemSubmit}>
+            <div className="input-wrapper">
+              <input
+                type="text"
+                value={newItem}
+                onChange={handleItemChange}
+                placeholder="Enter task details"
+              />
+
+              <input
+                type="date"
+                value={dueDate}
+                onChange={handleDueDateChange}
+                onMouseEnter={handleDueDateMouseEnter}
+                onMouseLeave={handleDueDateMouseLeave}
+              />
+
+              {showDueDateMessage && (
+                <p className="due-date-message">DUE DATE</p>
               )}
-            </button>
-          </div>
-        </form>
-        {confirmation && <p>{confirmation}</p>}
+            </div>
+
+            <div className="new-contentt">
+              <button type="submit">
+                {loading ? (
+                  <>
+                    <span>TICK-T</span>
+                    <FontAwesomeIcon icon={faClock} spin />
+                    <span>CK</span>
+                  </>
+                ) : (
+                  "Add New Task"
+                )}
+              </button>
+            </div>
+          </form>
+
+          {confirmation && <p>{confirmation}</p>}
+        </div>
       </div>
     </div>
   );
