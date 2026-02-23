@@ -12,7 +12,11 @@ const app = express();
 const PORT = process.env.PORT || 8086;
 
 // Middleware
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://todo-list-pyg6.onrender.com",
+  }),
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
