@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import "../Styles/myday.css";
 
-const Home = () => {
+const AllTask = () => {
   const [taskdata, setTaskData] = useState([]);
   const [loadingTasks, setLoadingTasks] = useState([]);
 
@@ -119,4 +119,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default AllTask;

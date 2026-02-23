@@ -21,6 +21,11 @@ const Sidebar = () => {
     toggle.classList.toggle("active");
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    window.location.href = "/login";
+  };
+
   return (
     <>
       <div className="navigation bg-light position-fixed vh-100 custom-sidebar">
@@ -40,7 +45,7 @@ const Sidebar = () => {
           {
             <li className="mb-3">
               <Link
-                to="/New"
+                to="/new"
                 className="text-dark text-decoration-none d-flex align-items-center"
               >
                 <span className="icon me-2">
@@ -52,7 +57,7 @@ const Sidebar = () => {
           }
           <li className="mb-3">
             <Link
-              to="/Myday"
+              to="/my-day"
               className="text-dark text-decoration-none d-flex align-items-center"
             >
               <span className="icon me-2">
@@ -74,7 +79,7 @@ const Sidebar = () => {
           </li>
           <li className="mb-3">
             <Link
-              to="/Scheduled"
+              to="/scheduled"
               className="text-dark text-decoration-none d-flex align-items-center"
             >
               <span className="icon me-2">
@@ -85,7 +90,7 @@ const Sidebar = () => {
           </li>
           <li className="mb-3">
             <Link
-              to="/Completed"
+              to="/completed"
               className="text-dark text-decoration-none d-flex align-items-center"
             >
               <span className="icon me-2">
@@ -107,7 +112,7 @@ const Sidebar = () => {
           </li>
           <li className="mb-3">
             <Link
-              to="/Home"
+              to="/all-task"
               className="text-dark text-decoration-none d-flex align-items-center"
             >
               <span className="icon me-2">
@@ -117,6 +122,11 @@ const Sidebar = () => {
             </Link>
           </li>
         </ul>
+        <div className="position-absolute bottom-0 w-100 p-3">
+          <button onClick={handleLogout} className="btn btn-outline-dark w-100">
+            Logout
+          </button>
+        </div>
       </div>
     </>
   );
