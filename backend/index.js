@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 8086;
 // Middleware
 app.use(
   cors({
-    origin: "https://todo-list-pyg6.onrender.com",
+    origin: "https://todo-list-frontend-ixan.onrender.com",
   }),
 );
 app.use(express.json());
