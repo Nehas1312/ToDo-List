@@ -89,9 +89,9 @@ const AllTask = () => {
                       >
                         {isTaskLoading(task.id) ? (
                           <>
-                            <span>+10&nbsp;P </span>
+                            <span>Kud&nbsp; </span>
                             <Spinner animation="border" size="sm" />
-                            <span>&nbsp;INTS</span>
+                            <span>&nbsp;s</span>
                           </>
                         ) : task.taccomplished ? (
                           "Completed"

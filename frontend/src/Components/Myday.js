@@ -92,9 +92,9 @@ const Myday = () => {
                     >
                       {isTaskLoading(task.id) ? (
                         <>
-                          <span>+10 P </span>
+                          <span>Kud </span>
                           <FontAwesomeIcon icon={faClock} spin />
-                          <span> INTS</span>
+                          <span>s</span>
                         </>
                       ) : task.taccomplished ? (
                         "Completed"
